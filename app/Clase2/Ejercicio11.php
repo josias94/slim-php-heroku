@@ -8,11 +8,7 @@ que las calcule invocando la función pow).
 */
 for ($i=1; $i < 5; $i++) { 
     for ($j=1; $j < 5; $j++) { 
-        echo($i);
-        echo("E");
-        echo("$j: ");
-        echo pow($i,$j);    
-        echo("<br>");
+        echo($i."^$j: ".pow($i,$j)."<br>");        
     }    
 }
 ?>
