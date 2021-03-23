@@ -1,3 +1,17 @@
 <?php
-echo 'Clase 2'
+/*
+Rivola Josias
+Aplicación Nº 11 (Potencias de números)
+Mostrar por pantalla las primeras 4 potencias de los
+números del uno 1 al 4 (hacer una función
+que las calcule invocando la función pow).
+*/
+for ($i=0; $i < 5; $i++) { 
+    for ($j=0; $j < 5; $j++) { 
+        echo ("$i E $j"pow($i,$j)."<br>");    
+    }    
+}
+
+
+
 ?>
