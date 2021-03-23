@@ -6,7 +6,7 @@ include_once("PHP/Clases/Archivos.php");
 $var = 9;
 $file_name = "Archivos/ListaPersonas.txt";
 
-echo "HolaJosi";
+echo "Agregar a la url /Clase2/";
 
 if($var == 0)
 {
