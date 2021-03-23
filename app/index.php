@@ -6,7 +6,7 @@ $var = $_GET["opcion"];
 
 $file_name = "Archivos/ListaPersonas.txt";
 
-
+echo "Hola";
 
 if($var == 0)
 {
