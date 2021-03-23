@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="JS/Grilla.js"></script>    
+    <title>Personas</title>
+</head>
+<body>
+    <div style="margin-left: 40%; margin-right: 50%;">
+        <input type="button" id="btnLista" value="Listar" onclick="$_Table(this)"> 
+    </div>
+    <form action="index.php" style="margin-left: 40%; margin-right: 50%;">
+        <fieldset>
+            <label for="opcion1">Harcodear</label>
+            <input type="radio" name="opcion" id="opcion1" value="0">
+            <br>
+            <label for="opcion2">Cargar</label>
+            <input type="radio" name="opcion" id="opcion2" value="1">
+            <br>
+            <label for="opcion3">Listar</label>
+            <input type="radio" name="opcion" id="opcion3" value="2" checked>
+            
+            <br>
+            <input type="submit" id="btnEnviar" value="Enviar">
+        </fieldset>
+    </form>
+</body>
+</html>

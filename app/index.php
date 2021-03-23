@@ -1,20 +1,47 @@
 <?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+include_once("PHP/Objetos/Persona.php");
+include_once("PHP/Clases/Archivos.php");
 
-require_once '../vendor/autoload.php';
+$var = $_GET["opcion"];
 
-
-
-$app = new \Slim\App([]);
+$file_name = "Archivos/ListaPersonas.txt";
 
 
 
-$app->get('[/]', function (Request $request, Response $response) {    
-    $response->getBody()->write("GET => Bienvenido!!! ,a SlimFramework Josias");
-    return $response;
+if($var == 0)
+{
+    $arrayHarcodeado = LeerArchivo("Archivos/PersonasHarcodeadas.txt");
+    EscribirArchivo($file_name, $arrayHarcodeado);
+}
+else if($var == 1)
+{        
+    $persona = Persona("Josias", "Rivola", "26", "Masculino");
+    EscribirArchivo($file_name, $persona);
+}
+else if ($var == 2)
+{
+    $array = LeerArchivo($file_name);
+    foreach ($array as $key => $value) {
+        MostrarKeyValue($value);
+        printf("////////////////////////////////////<br/>");
+    }
+}
 
-});
+function Algo()
+{
+    printf("LLEGUE");
+}
 
+function MostrarValue($obj){
+    foreach ($obj as $value) {
+        printf("$value<br/>");
+    }
+}
 
-$app->run();
+function MostrarKeyValue($obj){
+    foreach ($obj as $key => $value) {
+        printf("$key = $value<br/>");
+    }
+}
+
+?>
