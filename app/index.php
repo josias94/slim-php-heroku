@@ -2,8 +2,8 @@
 include_once("PHP/Objetos/Persona.php");
 include_once("PHP/Clases/Archivos.php");
 
-$var = $_GET["opcion"];
-
+//$var = $_GET["opcion"];
+$var = 9;
 $file_name = "Archivos/ListaPersonas.txt";
 
 echo "HolaJosi";
