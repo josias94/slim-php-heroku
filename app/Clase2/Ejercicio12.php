@@ -9,15 +9,15 @@ Ejemplo: Se recibe la palabra “HOLA” y luego queda “ALOH”.
 */
 
 $var = "HOLA";
-echo $var[0];
+
  //Invertir("HOLA");
 
 
-function Invertir($array)
+function Invertir($origin)
 {
-foreach ($array as  $value) {
-    echo $value;
-    echo "<br>";
+    for ($i=0; $i < strlen($origin); $i++) { 
+        echo($origin[$i]);
+    }
 }
     
     
