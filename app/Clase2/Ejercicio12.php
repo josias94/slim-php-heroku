@@ -19,8 +19,4 @@ function Invertir($origin)
         echo($origin[$i]."<br>");
     }
 }
-    
-    
-    
-}
 ?>
