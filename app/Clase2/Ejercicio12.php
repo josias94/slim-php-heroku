@@ -16,7 +16,7 @@ $var = "HOLA";
 function Invertir($origin)
 {
     for ($i=0; $i < strlen($origin); $i++) { 
-        echo($origin[$i]);
+        echo($origin[$i]."<br>");
     }
 }
     
