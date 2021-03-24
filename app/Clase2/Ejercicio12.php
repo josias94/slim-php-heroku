@@ -7,13 +7,17 @@ de caracteres y que invierta el orden
 de las letras del Array.
 Ejemplo: Se recibe la palabra “HOLA” y luego queda “ALOH”.
 */
-echo Invertir("1 Amo la pacifica paloma 2");
+ Invertir("HOLA");
 
 
 function Invertir($array)
 {
-    $invertido = array_reverse($array);
-    echo $array."<br>";
-    echo $invertido;  
+foreach ($array as  $value) {
+    echo $value;
+    echo "<br>";
+}
+    
+    
+    
 }
 ?>
