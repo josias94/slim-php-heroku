@@ -8,15 +8,33 @@ de las letras del Array.
 Ejemplo: Se recibe la palabra “HOLA” y luego queda “ALOH”.
 */
 
-Invertir("HOLA");
+$var = ["H","O","L","A"];
 
-function Invertir($origin)
+InvertirString("HOLA");
+echo "<br>";
+InvertirArrayChar($var);
+
+function InvertirString($origin)
 {
     $invertido = "";
-    for ($i=strlen($origin); $i >= 0; $i--) { 
+    for ($i=strlen($origin)-1; $i >= 0; $i--) { 
         $invertido .= $origin[$i];
     }
     echo $origin."<br>";
     echo $invertido;
+}
+
+function InvertirArrayChar($origin)
+{
+	$invertido = array_reverse($origin);    
+    foreach($invertido as $value)
+	{
+		echo $value;
+	}
+	echo "<br>";
+    foreach($origin as $value)
+	{
+		echo $value;
+	}
 }
 ?>
