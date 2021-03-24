@@ -10,7 +10,7 @@ Ejemplo: Se recibe la palabra “HOLA” y luego queda “ALOH”.
 
 $var = "HOLA";
 
- //Invertir("HOLA");
+ Invertir("HOLA");
 
 
 function Invertir($origin)
