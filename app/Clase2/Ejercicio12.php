@@ -7,7 +7,10 @@ de caracteres y que invierta el orden
 de las letras del Array.
 Ejemplo: Se recibe la palabra “HOLA” y luego queda “ALOH”.
 */
- Invertir("HOLA");
+
+$var = "HOLA";
+echo $var[0];
+ //Invertir("HOLA");
 
 
 function Invertir($array)
