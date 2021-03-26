@@ -14,17 +14,7 @@ Utilizar el método ToString para obtener toda la información completa del obje
 dibujarlo por pantalla.
 */
 
-$tri = new Triangulo(5, 3);
-$tri->SetColor("red");
-echo($tri);
-$tri->SetColor("green");
-echo($tri);
 
-$rec = new Rectangulo(15, 4);
-$rec->SetColor("red");
-echo($rec);
-$rec->SetColor("green");
-echo($rec);
 
 abstract class FiguraGeometrica{
 
@@ -141,5 +131,20 @@ class Triangulo extends FiguraGeometrica{
         return parent::__ToString()."Base: ".$this->_base."<br>Altura: ".$this->_altura.$this->Dibujar();
     }
 }
+
+
+
+
+$tri = new Triangulo(5, 3);
+$tri->SetColor("red");
+echo($tri);
+$tri->SetColor("green");
+echo($tri);
+
+$rec = new Rectangulo(15, 4);
+$rec->SetColor("red");
+echo($rec);
+$rec->SetColor("green");
+echo($rec);
 
 ?>
