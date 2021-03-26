@@ -69,7 +69,7 @@ class Auto{
         return ($auto1->_marca == $auto2->_marca);
     }
 
-    function Add($autoUno,$autoDos)    {
+    static function Add($autoUno,$autoDos)    {
         $retorno = 0;
         if(Auto::Equals($autoUno, $autoDos) && $autoUno->_color == $autoDos->_color)
         {
