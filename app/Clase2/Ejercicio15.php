@@ -14,18 +14,17 @@ Utilizar el método ToString para obtener toda la información completa del obje
 dibujarlo por pantalla.
 */
 
-$tri1 = new Triangulo(5, 3);
-echo($tri1);
-$tri1->SetColor("red");
-echo($tri1);
-$tri1->SetColor("green");
-echo($tri1);
-// $rectangulo1 = new Rectangulo(15, 4);
-// echo($rectangulo1);
-// $rectangulo1->SetColor("red");
-// echo($rectangulo1);
-// $rectangulo1->SetColor("green");
-// echo($rectangulo1);
+$tri = new Triangulo(5, 3);
+$tri->SetColor("red");
+echo($tri);
+$tri->SetColor("green");
+echo($tri);
+
+$rec = new Rectangulo(15, 4);
+$rec->SetColor("red");
+echo($rec);
+$rec->SetColor("green");
+echo($rec);
 
 abstract class FiguraGeometrica{
 
@@ -55,8 +54,7 @@ abstract class FiguraGeometrica{
     protected abstract function CalcularDatos();
 }
 
-class Rectangulo extends FiguraGeometrica
-{
+class Rectangulo extends FiguraGeometrica{
     public $_ladoUno;
     public $_ladoDos;
 
@@ -93,13 +91,13 @@ class Rectangulo extends FiguraGeometrica
         $retorno.= "</p>";
         return $retorno;
     }
+
     public function __ToString(){
         return parent::__ToString()."Altura: ".$this->_ladoDos."<br>Ancho: ".$this->_ladoUno.$this->Dibujar();
     }
 }
 
-class Triangulo extends FiguraGeometrica
-{
+class Triangulo extends FiguraGeometrica{
     public $_altura;
     public $_base;
 
@@ -107,39 +105,41 @@ class Triangulo extends FiguraGeometrica
         parent::__construct();
         $this->_altura = $a;
         $this->_base = $b;
+        $this->CalcularDatos();
     }
 
     protected function CalcularDatos(){
-
+        $this->_perimetro = $this->_base + $this->_altura*2;
+        $this->_superficie = $this->_base * $this->_altura/2;
     }
 
     public function Dibujar(){
         $color = $this->GetColor();
         $retorno = "<p style=color:$color;>";
-        $columnas = $this->_base;
-        $filas = $this->_altura;
-
-        for ($j=0; $j < $filas ; $j++) {             
-            for ($i=0; $i < $columnas; $i++) { 
-                // if($i == 0 || $i == $columnas-1 || $j == 0 || $j == $filas - 1){
-                //     $retorno .= "*";
-                // }
-                // else{
-                //     $retorno .= "&nbsp;&nbsp;";
-                // }
+        $base = $this->_base;    
+        $altura = $this->_altura;
+        $espacios = $altura;
+        $asteriscos = 1;
+        for ($i=0; $i < $altura; $i++) {
+            for ($j=0; $j < $espacios-1; $j++) {
+                $retorno .= "&nbsp;&nbsp;";
+                //$retorno .= "+";
+            }
+            for ($j=0; $j < $asteriscos; $j++) {
                 $retorno .= "*";
-            }         
+            }
+            $espacios--;
+            $asteriscos+=2;
             $retorno .= "<br>";
         }
+        
         $retorno.= "</p>";
         return $retorno;
     }
+
     public function __ToString(){
-        return parent::__ToString().$this->Dibujar();
+        return parent::__ToString()."Base: ".$this->_base."<br>Altura: ".$this->_altura.$this->Dibujar();
     }
 }
-
-
-
 
 ?>
