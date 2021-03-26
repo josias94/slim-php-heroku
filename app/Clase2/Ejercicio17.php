@@ -34,42 +34,6 @@ no.
 ● Utilizar el método de clase “MostrarAuto” para mostrar cada los objetos impares (1, 3,
 5)
 */
-
-$a1 = new Auto("Rojo","Mercedez");
-$a2 = new Auto("Azul","Mercedez");
-
-$a3 = new Auto("Verde","Mercedez",12);
-$a4 = new Auto("Verde","Mercedez",15.5);
-
-$a5 = new Auto("Verde","Mercedez",15.0, "23/03/2021 00:00:00");
-
-
-$a3->AgregarImpuestos(1500);
-$a4->AgregarImpuestos(1500);
-$a5->AgregarImpuestos(1500);
-echo("ADD<br>");
-printf(Auto::Add($a1,$a2));
-
-printf(Auto::Equals($a1,$a2));
-
-echo("Auto1<br>");
-Auto::MostrarAuto($a1);
-echo("Auto2<br>");
-Auto::MostrarAuto($a2);
-echo("Auto3<br>");
-Auto::MostrarAuto($a3);
-echo("Auto4<br>");
-Auto::MostrarAuto($a4);
-echo("Auto5<br>");
-Auto::MostrarAuto($a5);
-
-
-
-
-
-
-
-
 class Auto{
     
     private $_color;
@@ -77,7 +41,7 @@ class Auto{
     private $_marca;
     private $_fecha;
 
-    function __construct($color, $marca, $precio = 0, $fecha = null){
+    function __construct($color, $marca, $precio = 10, $fecha = null){
         $this->_color = $color;
         $this->_precio = $precio;
         $this->_marca = $marca;
@@ -101,14 +65,13 @@ class Auto{
         }
     }
 
-    static function  Equals($auto1, $auto2){
-        return ($auto1->_marca == $auto2->marca);
+    static function Equals($auto1, $auto2){
+        return ($auto1->_marca == $auto2->_marca);
     }
 
-    function Add($autoUno,$autoDos)
-    {
+    function Add($autoUno,$autoDos)    {
         $retorno = 0;
-        if(Auto.Equals($autoUno,$autoDos) && $autoUno->_color == $autoDos->_color)
+        if(Auto::Equals($autoUno, $autoDos) && $autoUno->_color == $autoDos->_color)
         {
             $retorno = $autoUno->_precio + $autoDos->_precio;
         }
