@@ -15,7 +15,7 @@ $a4->AgregarImpuestos(1500);
 $a5->AgregarImpuestos(1500);
 
 printf("ADD: ". Auto::Add($a1,$a2)."<br>");
-printf("Equals: ".Auto::Equals($a1,$a2)."<br>");
+printf("Equals: ".$a1->Equals($a2)."<br>");
 echo("<br>Auto1<br>");
 Auto::MostrarAuto($a1);
 echo("<br>Auto3<br>");

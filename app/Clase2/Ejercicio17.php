@@ -58,20 +58,20 @@ class Auto{
         $this->_precio += $agregado;      
     }
 	
-    function MostrarAuto($a1)
+    static function MostrarAuto($a1)
     {
         foreach ($a1 as $key => $value) {
             echo("$key: $value<br>");
         }
     }
 
-    static function Equals($auto1, $auto2){
-        return ($auto1->_marca == $auto2->_marca);
+    function Equals($otro){
+        return ($this->_marca == $otro->_marca);
     }
 
-    static function Add($autoUno,$autoDos)    {
+    static function Add($autoUno,$autoDos){
         $retorno = 0;
-        if(Auto::Equals($autoUno, $autoDos) && $autoUno->_color == $autoDos->_color)
+        if($autoUno->Equals($autoDos) && $autoUno->_color == $autoDos->_color)
         {
             $retorno = $autoUno->_precio + $autoDos->_precio;
         }
