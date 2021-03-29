@@ -167,9 +167,10 @@ class Vuelo{
             $i = array_search($p, $v->_listaDePasajeros, true);
             unset($v->_listaDePasajeros[$i]);
             echo "El pasajero ah sido eyectado correctamente<br>";
+            echo "<img src='https://i.postimg.cc/tTtNrtQW/zeyecc.jpg' width='200' height='200'>";
         }                            
         else{
-            echo "El pasajero no estaba en el vuelo o habia sido eyectado anteriormente<br>";
+            echo "El pasajero no estaba en el vuelo o habia sido eyectado anteriormente <br>";
         } 
     }
 }
@@ -186,20 +187,24 @@ $v1->AgregarPasajero($p1);
 $v1->AgregarPasajero($p2);
 $v2->AgregarPasajero($p3);
 $v2->AgregarPasajero($p4);
+echo("//////////////MostrarVuelo v1///////////////////////<br>");
 $v1->MostrarVuelo();
-echo("///////////////////////////////////////////////////////<br>");
+echo("//////////////MostrarVuelo v2///////////////////////<br>");
 $v2->MostrarVuelo();
 echo("///////////////////////////////////////////////////////<br>");
 
 echo ("La suma del vuelo v1 y v2 es: ".Vuelo::Add($v1, $v2)."<br>");
+echo "<br>";
+echo("/////////////Remove p1//////////////////////////<br>");
 Vuelo::Remove($v1,$p1);
+echo "<br>";
+echo("/////////////Remove p1 nuevamente//////////////////////<br>");
 Vuelo::Remove($v1,$p1);
+echo "<br>";
+echo("/////////////Remove p3 (No Existe)/////////////////////<br>");
 Vuelo::Remove($v1,$p3);
-echo("///////////////////////////////////////////////////////<br>");
-
-var_dump($p1->Equals($p3));
-echo("<br>");
+echo "<br>";
+echo("////////////MostrarPasajero///////////////////////<br>");
 Pasajero::MostrarPasajero($p1);
-Pasajero::MostrarPasajero($p2);
-Pasajero::MostrarPasajero($p3);
+
 ?>

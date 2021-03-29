@@ -1,6 +1,5 @@
 <?php
 require("Ejercicio18.php");
-
 $a1 = new Auto("Rojo","Mercedez");
 $a2 = new Auto("Rojo","Mercedez");
 $a3 = new Auto("Azul","Mercedez");

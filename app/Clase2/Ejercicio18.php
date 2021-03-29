@@ -72,10 +72,8 @@ class Garage{
 
     function Remove($auto){              
         if($this->Equals($auto)){            
-            $i = array_search($auto, $this->_autos, true);
-            if($i){
-                unset($this->_autos[$i]);
-            }                    
+            $i = array_search($auto, $this->_autos, true);            
+            unset($this->_autos[$i]);                               
         }
         else{
             echo "El auto no esta en el garage<br>";
