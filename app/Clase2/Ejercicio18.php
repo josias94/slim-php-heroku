@@ -30,7 +30,6 @@ class Garage{
     private $_precioPorHora;
     private $_autos;
     
-
     function __construct($razSocial, $pxH = null){
         $this->_razonSocial = $razSocial;
         if($pxH != null){
@@ -82,25 +81,5 @@ class Garage{
             echo "El auto no esta en el garage<br>";
         } 
     }
-
 }
-
-
-$gar1 = new Garage("qcy", 10);
-$a1 = new Auto("Rojo","Mercedez");
-$a2 = new Auto("Rojo","Mercedez");
-$a3 = new Auto("Azul","Mercedez");
-
-
-$gar1->Add($a1);
-$gar1->Add($a2);
-$gar1->Add($a3);
-$gar1->MostrarGarage();
-echo("//////////////////////////////////////////////////////////<br>");
-
-
-
-
-
-
 ?>
