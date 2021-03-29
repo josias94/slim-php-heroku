@@ -91,30 +91,114 @@ class Vuelo{
         $retorno .= "Cantidad Maxima: $this->_cantMaxima<br>";
         $retorno .= "Precio: $this->_precio<br>";
         $retorno .= "Fecha: $this->_fecha<br>";
+        
+        if(count($this->_listaDePasajeros) > 0){
+            $retorno .= "Lista de pasajeros:<br><br>";
+        }
         foreach ($this->_listaDePasajeros as $pasajero){
             $retorno .= $pasajero->GetInfoPasajero()."<br>";
         }
         return $retorno;        
     }
 
-    public function AgregarPasajero($pasajero){        
-        if($this->_listaDePasajeros.Length < $this->_cantMaxima){
-            foreach ($this->_listaDePasajeros as $value) {
-                if(!$value.Equals($pasajero)){
+    public function AgregarPasajero($pasajero){
+        $existe = 0;
+        if(count($this->_listaDePasajeros) < $this->_cantMaxima){
+            if(count($this->_listaDePasajeros) == 0){
+                array_push($this->_listaDePasajeros, $pasajero);
+                return true;
+            }
+            else{
+                foreach ($this->_listaDePasajeros as $value) {
+                    if($value->Equals($pasajero)){
+                        $existe = 1;
+                        echo "El pasajero ya se encuentra en el vuelo<br>";                        
+                    }
+                }
+                if(!$existe){
                     array_push($this->_listaDePasajeros, $pasajero);
                     return true;
-                }
-            }
+                } 
+            }            
+        }
+        else{
+            echo "Cantidad maxima alcanzada<br>";
         }
         return false;
+    }
+    
+    public function MostrarVuelo(){
+        echo $this->Get();
+    }
+
+    public static function Add($v1, $v2){
+        $retorno = 0;
+        foreach ($v1->_listaDePasajeros as $p) {            
+            $i = strrpos($p->GetInfoPasajero(),"Plus: ");
+            $esPlus = substr($p->GetInfoPasajero(), $i + 6, 2);            
+            if($esPlus == "Si"){
+                $retorno += $v1->_precio * 0.8;
+            }
+            else{
+                $retorno += $v1->_precio;
+            }
+        }
+        foreach ($v2->_listaDePasajeros as $p) {            
+            $i = strrpos($p->GetInfoPasajero(),"Plus: ");
+            $esPlus = substr($p->GetInfoPasajero(), $i + 6, 2);            
+            if($esPlus == "Si"){
+                $retorno += $v2->_precio * 0.8;
+            }
+            else{
+                $retorno += $v2->_precio;
+            }
+        }
+        return $retorno;
+    }
+
+    public static function Remove($v, $p){
+        $existe = 0;
+        foreach ($v->_listaDePasajeros as $value) {
+            if($value->Equals($p)){
+                $existe = 1;                
+            }
+        }
+        if($existe == 1){
+            $i = array_search($p, $v->_listaDePasajeros, true);
+            unset($v->_listaDePasajeros[$i]);
+            echo "El pasajero ah sido eyectado correctamente<br>";
+        }                            
+        else{
+            echo "El pasajero no estaba en el vuelo o habia sido eyectado anteriormente<br>";
+        } 
     }
 }
 
 $p1 = new Pasajero("AAAAA", "aaaaa", 10000000, false);
 $p2 = new Pasajero("BBBBB", "bbbbb", 10000001, true);
 $p3 = new Pasajero("CCCCC", "ccccc", 10000000, true);
+$p4 = new Pasajero("DDDDD", "ddddd", 10000002, false);
 
-//var_dump($p1->Equals($p3));
+$v1 = new Vuelo("Aerolineas Wacanda", 1000,5);
+$v2 = new Vuelo("Aerolineas Atlantis", 500,5);
+
+$v1->AgregarPasajero($p1);
+$v1->AgregarPasajero($p2);
+$v2->AgregarPasajero($p3);
+$v2->AgregarPasajero($p4);
+$v1->MostrarVuelo();
+echo("///////////////////////////////////////////////////////<br>");
+$v2->MostrarVuelo();
+echo("///////////////////////////////////////////////////////<br>");
+
+echo ("La suma del vuelo v1 y v2 es: ".Vuelo::Add($v1, $v2)."<br>");
+Vuelo::Remove($v1,$p1);
+Vuelo::Remove($v1,$p1);
+Vuelo::Remove($v1,$p3);
+echo("///////////////////////////////////////////////////////<br>");
+
+var_dump($p1->Equals($p3));
+echo("<br>");
 Pasajero::MostrarPasajero($p1);
 Pasajero::MostrarPasajero($p2);
 Pasajero::MostrarPasajero($p3);
