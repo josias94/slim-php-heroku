@@ -172,7 +172,7 @@ class Vuelo{
         else{
             echo "El pasajero no estaba en el vuelo o habia sido eyectado anteriormente <br>";
         }
-        return $v1;
+        return $v;
     }
 }
 
