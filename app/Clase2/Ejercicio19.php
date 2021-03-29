@@ -52,17 +52,70 @@ class Pasajero{
     }
 
     public function GetInfoPasajero(){
-        return $this->_apellido.$this->_nombre.$this->_dni.$this->_esPlus;
+        $retorno = "Apellido: $this->_apellido<br>";
+        $retorno .= "Nombre: $this->_nombre<br>";
+        $retorno .= "DNI: $this->_dni<br>";
+        $retorno .= "Plus: ";
+        $retorno .= $this->_esPlus == true ? "Si":"No";
+        return $retorno."<br>";
     }
 
     public static function MostrarPasajero($pasajero)
     {
-        echo ($pasajero->GetInfoPasajero());
+        echo ($pasajero->GetInfoPasajero()."<br>");
     }
 }
 
+class Vuelo{
+    private $_fecha;
+    private $_empresa;
+    private $_precio;
+    private $_listaDePasajeros;
+    private $_cantMaxima;
 
-$p = new Pasajero("Rivola", "Josias", 38690995, "false");
+    function __construct($empresa, $precio, $cantMax = null){
+        $this->_fecha = date("d/m/Y H:i:s");
+        $this->_empresa = $empresa;
+        $this->_precio = $precio;
+        $this->_listaDePasajeros = [];
+        if($cantMax != null){
+            $this->_cantMaxima = $cantMax;
+        }
+        else{
+            $this->_cantMaxima = 1;
+        }        
+    }
 
-Pasajero::MostrarPasajero($p);
+    public function Get(){
+        $retorno = "Empresa: $this->_empresa<br>";
+        $retorno .= "Cantidad Maxima: $this->_cantMaxima<br>";
+        $retorno .= "Precio: $this->_precio<br>";
+        $retorno .= "Fecha: $this->_fecha<br>";
+        foreach ($this->_listaDePasajeros as $pasajero){
+            $retorno .= $pasajero->GetInfoPasajero()."<br>";
+        }
+        return $retorno;        
+    }
+
+    public function AgregarPasajero($pasajero){        
+        if($this->_listaDePasajeros.Length < $this->_cantMaxima){
+            foreach ($this->_listaDePasajeros as $value) {
+                if(!$value.Equals($pasajero)){
+                    array_push($this->_listaDePasajeros, $pasajero);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+$p1 = new Pasajero("AAAAA", "aaaaa", 10000000, false);
+$p2 = new Pasajero("BBBBB", "bbbbb", 10000001, true);
+$p3 = new Pasajero("CCCCC", "ccccc", 10000000, true);
+
+//var_dump($p1->Equals($p3));
+Pasajero::MostrarPasajero($p1);
+Pasajero::MostrarPasajero($p2);
+Pasajero::MostrarPasajero($p3);
 ?>
