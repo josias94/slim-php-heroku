@@ -9,3 +9,4 @@ if (isset($_POST["usuario"]) && isset($_POST["pass"]) && isset($_POST["mail"])) 
     $u = new Usuario($_POST["usuario"], $_POST["pass"]);
     $u->ValidarUser();
 }
+?>
