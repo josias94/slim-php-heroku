@@ -45,6 +45,21 @@ class Usuario{
         EscribirArchivoTxt("log.csv", $msg);
     }
 
+    public static function Listar(){
+        $array = LeerArchivoTxt("Usuarios.csv");
+        $mostrar = "<ul>";
+        foreach ($array as $value) {        
+            $obj = explode(",", $value);
+            $usuario = new Usuario($obj[0], $obj[1], $obj[2]);
+            $mostrar .= "<li>".$usuario."</li><br>"; 
+            // foreach ($obj as $atributo) {
+            //     $mostrar .= "<li>".$atributo."</li><br>";
+            // }        
+        }
+        $mostrar .= "</ul>";
+        return $mostrar;
+    }
+
     public function Alta(){        
         echo (EscribirArchivoTxt("Usuarios.csv", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
     }
