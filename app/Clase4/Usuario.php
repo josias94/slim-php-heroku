@@ -22,8 +22,7 @@ class Usuario{
             $element = array_pop($array);
             $this->_id = strval($element->_id + 1);
         }        
-    }
-    
+    }  
 
     public function ValidarUser(){
         if(Usuario::$PrimerHilo){
@@ -76,7 +75,6 @@ class Usuario{
     public function AltaJSON(){
         echo (EscribirArchivoJSON("Usuarios.json", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
     }
-
 
     function __toString(){
         return $this->_user.",".$this->_pass.",".$this->_mail;
