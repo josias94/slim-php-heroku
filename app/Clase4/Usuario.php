@@ -78,6 +78,7 @@ class Usuario{
         //echo (EscribirArchivoJSON("Usuarios.json", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
     }
 
+
     function __toString(){
         return $this->_user.",".$this->_pass.",".$this->_mail;
     }
