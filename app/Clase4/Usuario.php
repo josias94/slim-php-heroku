@@ -2,10 +2,10 @@
 include("Archivos.php");
 
 class Usuario{
-    private $_id;
-    private $_user;
-    private $_pass;
-    private $_mail;
+    public $_id;
+    public $_user;
+    public $_pass;
+    public $_mail;
     private static $_ListaUsuarios = [];
     private static $PrimerHilo = 1;
 
@@ -14,11 +14,13 @@ class Usuario{
         $this->_user = $user;
         $this->_pass = $pass;
         $this->_mail = $mail;
-        if($id == null){
+        if($id != null){
             $this->_id = $id;
         }
-        else{
-            //Generar id random
+        else{            
+            $array = LeerArchivoJSON("Usuarios.json");
+            $element = array_pop($array);
+            $this->_id = strval($element->_id + 1);
         }        
     }
     
@@ -71,8 +73,9 @@ class Usuario{
         echo (EscribirArchivoTxt("Usuarios.csv", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
     }
 
-    public function AltaJSON(){        
-        echo (EscribirArchivoTxt("Usuarios.json", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
+    public function AltaJSON(){
+        var_dump($this);
+        //echo (EscribirArchivoJSON("Usuarios.json", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
     }
 
     function __toString(){

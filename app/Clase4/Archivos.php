@@ -1,17 +1,20 @@
 <?php  
 
 function EscribirArchivoJSON($file_name, $Obj){
+    $pudo = 0;    
     if (!file_exists($file_name) || filesize($file_name) == 0){
         $file = fopen($file_name, "w");
-        fwrite($file, json_encode($Obj));
+        $array[0] = $Obj;
+        $pudo = fwrite($file, json_encode($array));
         fclose($file);
     }
     else{
         $file = fopen($file_name, "c");
         fseek($file, filesize($file_name)-1);        
-        fwrite($file, ",".json_encode($Obj)."]");        
+        $pudo = fwrite($file, ",".json_encode($Obj)."]");        
         fclose($file);
     }
+    return $pudo;
 }
 
 function LeerArchivoJSON($file_name)
