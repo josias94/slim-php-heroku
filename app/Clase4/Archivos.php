@@ -17,8 +17,7 @@ function EscribirArchivoJSON($file_name, $Obj){
     return $pudo;
 }
 
-function LeerArchivoJSON($file_name)
-{
+function LeerArchivoJSON($file_name){
     $array = [];    
     if (file_exists($file_name) && filesize($file_name) > 0){
         $file = fopen($file_name, "r");
@@ -45,8 +44,7 @@ function EscribirArchivoTxt($file_name, $msg){
     return $pudo;
 }
 
-function LeerArchivoTxt($file_name)
-{
+function LeerArchivoTxt($file_name){
     $array = [];
     if (file_exists($file_name) && filesize($file_name) > 0){
         $file = fopen($file_name, "r");
@@ -55,6 +53,17 @@ function LeerArchivoTxt($file_name)
         fclose($file);
     }    
     return $array;
+}
+
+function MoveFile($file, $destino, $backup){
+    $tipo = explode(".",$file["name"]);
+    $destino .= ".".$tipo[1];    
+    $backup .= date("d-m-Y-H-i-s").".".$tipo[1];
+
+    if(file_exists($destino)){        
+        rename($destino, $backup);
+    }    
+    move_uploaded_file($file["tmp_name"], $destino);
 }
 
 ?>

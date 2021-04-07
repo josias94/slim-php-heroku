@@ -16,25 +16,16 @@ Hacer los métodos necesarios en la clase usuario.
 */
 include("Usuario.php");
 
-//var_dump($_FILES);
+
 
 
 if (isset($_POST["usuario"]) && isset($_POST["pass"]) && isset($_POST["mail"])) {    
     $u = new Usuario($_POST["usuario"], $_POST["pass"], $_POST["mail"]);
-    //$u->AltaJSON();
+    $u->AltaJSON();
     
-
-
-    $tipo = explode(".",$_FILES["fotoUsuario"]["name"]);
-    $destino = "Fotos/".$_POST["usuario"].".".$tipo[1];
-    
-    $Va = "Fotos/VA/".$_POST["usuario"].date("d-m-Y-H-i-s").".".$tipo[1];
-
-    if(file_exists($destino)){        
-        rename($destino, $Va);
-    }
-    
-    move_uploaded_file($_FILES["fotoUsuario"]["tmp_name"], $destino);
+    $destino = "Fotos/".$_POST["usuario"];
+    $backup = "Fotos/VA/".$_POST["usuario"];
+    MoveFile($_FILES["fotoUsuario"], $destino, $backup);
 
 } 
 ?>

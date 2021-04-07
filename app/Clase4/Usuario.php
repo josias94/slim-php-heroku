@@ -74,8 +74,7 @@ class Usuario{
     }
 
     public function AltaJSON(){
-        var_dump($this);
-        //echo (EscribirArchivoJSON("Usuarios.json", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
+        echo (EscribirArchivoJSON("Usuarios.json", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
     }
 
 
