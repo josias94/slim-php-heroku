@@ -91,6 +91,18 @@ class Producto{
         $mostrar .= "</ul>";
         return $mostrar;
     }
+
+    public static function BuscarPorCodBarra($codBarra){
+        $array = LeerArchivoJSON("Productos/Productos.json");
+        
+        foreach ($array as $val) {
+            if($val->codBarra == $codBarra)
+            {
+                return new Producto($val->nombre, $val->tipo, $val->stock, $val->precio, $val->codBarra,$val->id);
+            }                            
+        }
+        return null;
+    }
 }
 
 ?>

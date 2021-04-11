@@ -15,7 +15,6 @@ class Usuario{
         $this->_pass = $pass;
         $this->_mail = $mail;
         if($id != null){
-            echo "Hola";
             $this->_id = $id;
         }
         else{            
