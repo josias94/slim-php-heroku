@@ -16,11 +16,15 @@ Retorna los datos que contiene ese array en una lista
 Hacer los métodos necesarios en la clase usuario
  */
 include("Usuario.php");
+include("Producto.php");
 
 if (isset($_GET["listado"])) {
 
     if($_GET["listado"] == "usuarios"){
         echo Usuario::ListarJSON();
+    }
+    elseif($_GET["listado"] == "productos"){
+        echo Producto::ListarJSON();
     }    
 }
 else{

@@ -1,5 +1,5 @@
 <?php
-include("Archivos.php");
+include_once("Archivos.php");
 
 class Producto{
     public $id;
@@ -32,6 +32,10 @@ class Producto{
         $this->codBarra = $codBarra;
     }
 
+    public function __toString(){
+        return $this->id.", ".$this->nombre.", ".$this->tipo.", ".$this->stock.", ".$this->precio.", ".$this->codBarra;
+    }
+
     public function ValidarProducto(){
         if(Producto::$PrimerHilo){
             $array = LeerArchivoJSON("Productos/Productos.json");
@@ -53,10 +57,11 @@ class Producto{
 
         if($this->ValidarProducto()){
             $stockActual = $this->SumarStock();
-            echo ("producto:$this->nombre Nuevo Stock: $stockActual");
+            //echo ("producto:$this->nombre Nuevo Stock: $stockActual");
+            echo "Actualizado";
         }
-        else{
-            echo (EscribirArchivoJSON("Productos/Productos.json", $this) > 0) ? "Se agrego el producto correctamente al archivo" : "Error al guardar";            
+        else{            
+            echo (EscribirArchivoJSON("Productos/Productos.json", $this) > 0) ? "Ingresado" : "No se pudo hacer";            
         }        
     }
 
@@ -70,6 +75,21 @@ class Producto{
             }
         }
         return 0;  
+    }
+
+    public static function ListarJSON(){
+        $array = LeerArchivoJSON("Productos/Productos.json");
+        $mostrar = "<ul>";
+        foreach ($array as $val) {
+            $prod = new Producto($val->nombre, $val->tipo, $val->stock, $val->precio, $val->codBarra,$val->id);
+            $path = "Productos/Fotos/".$prod->codBarra.".png";
+            $foto = base64_encode(file_get_contents($path));
+            $src = 'data:'.mime_content_type($path).';base64,'.$foto; 
+            
+            $mostrar .= "<li>".$prod."<img width='50' height='50' src=\"$src\">"."</li><br>";
+        }
+        $mostrar .= "</ul>";
+        return $mostrar;
     }
 }
 

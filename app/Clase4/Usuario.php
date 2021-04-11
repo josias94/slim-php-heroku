@@ -1,5 +1,5 @@
 <?php
-include("Archivos.php");
+include_once("Archivos.php");
 
 class Usuario{
     public $_id;
