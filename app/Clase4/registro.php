@@ -22,6 +22,10 @@ if (isset($_POST["usuario"]) && isset($_POST["pass"]) && isset($_POST["mail"])) 
 
     $destino = "Fotos/".$_POST["usuario"];
     $backup = "Fotos/VA/".$_POST["usuario"];
-    MoveFile($_FILES["fotoUsuario"], $destino, $backup);
-} 
+    echo MoveFile($_FILES["fotoUsuario"], $destino, $backup);
+}
+else{
+    http_response_code(404);
+    echo "Faltan Datos";
+}
 ?>

@@ -63,7 +63,7 @@ function MoveFile($file, $destino, $backup){
     if(file_exists($destino)){        
         rename($destino, $backup);
     }    
-    move_uploaded_file($file["tmp_name"], $destino);
+    return move_uploaded_file($file["tmp_name"], $destino);
 }
 
 ?>
