@@ -16,7 +16,7 @@ class Producto{
             $this->id = $id;
         }
         else{
-            $array = LeerArchivoJSON("Productos.json");
+            $array = LeerArchivoJSON("Productos/Productos.json");
             if(count($array) == 0){
                 $this->id = "0";    
             }
@@ -84,9 +84,9 @@ class Producto{
             $prod = new Producto($val->nombre, $val->tipo, $val->stock, $val->precio, $val->codBarra,$val->id);
             $path = "Productos/Fotos/".$prod->codBarra.".png";
             $foto = base64_encode(file_get_contents($path));
-            $src = 'data:'.mime_content_type($path).';base64,'.$foto; 
+            $src = 'data:'.mime_content_type($path).';base64,'.$foto;             
+            $mostrar .= "<li>".$prod."<img width='100' height='100' src=\"$src\">"."</li><br>";
             
-            $mostrar .= "<li>".$prod."<img width='50' height='50' src=\"$src\">"."</li><br>";
         }
         $mostrar .= "</ul>";
         return $mostrar;
