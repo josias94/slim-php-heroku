@@ -24,3 +24,8 @@ if (isset($_GET["listado"])) {
     }
     
 }
+else{
+    http_response_code(404);
+    echo "Faltan Datos";
+}
+?>

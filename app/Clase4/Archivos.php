@@ -57,7 +57,8 @@ function LeerArchivoTxt($file_name){
 
 function MoveFile($file, $destino, $backup){
     $tipo = explode(".",$file["name"]);
-    $destino .= ".".$tipo[1];    
+    //$destino .= ".".$tipo[1];
+    $destino .= ".png";//Se cambia la imagen a png porque sino en la lectura no la encuentro xd
     $backup .= date("d-m-Y-H-i-s").".".$tipo[1];
 
     if(file_exists($destino)){        
