@@ -18,7 +18,7 @@ class Producto{
         else{
             $array = LeerArchivoJSON("Productos.json");
             if(count($array) == 0){
-                $this->id = 0;    
+                $this->id = "0";    
             }
             else{
                 $element = array_pop($array);

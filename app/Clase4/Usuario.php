@@ -15,16 +15,17 @@ class Usuario{
         $this->_pass = $pass;
         $this->_mail = $mail;
         if($id != null){
+            echo "Hola";
             $this->_id = $id;
         }
-        else{
+        else{            
             $array = LeerArchivoJSON("Usuarios/Usuarios.json");
-            if(count($array) == 0){
-                $this->id = 0;    
+            if(count($array) == 0){                
+                $this->_id = "0";    
             }
-            else{
+            else{                
                 $element = array_pop($array);
-                $this->id = strval($element->id + 1);
+                $this->_id = strval($element->_id + 1);
             }
         }        
     }  
@@ -98,6 +99,18 @@ class Usuario{
 
     function __toString(){
         return $this->_user.",".$this->_pass.",".$this->_mail;
+    }
+
+    public static function BuscarPorId($id){
+        $array = LeerArchivoJSON("Usuarios/Usuarios.json");
+        
+        foreach ($array as $value) {
+            if($value->_id == $id)
+            {
+                return new Usuario($value->_user, $value->_pass, $value->_mail, $value->_id);
+            }                            
+        }
+        return null;
     }
 }
 
