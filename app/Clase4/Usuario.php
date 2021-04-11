@@ -17,16 +17,21 @@ class Usuario{
         if($id != null){
             $this->_id = $id;
         }
-        else{            
-            $array = LeerArchivoJSON("Usuarios.json");
-            $element = array_pop($array);
-            $this->_id = strval($element->_id + 1);
+        else{
+            $array = LeerArchivoJSON("Usuarios/Usuarios.json");
+            if(count($array) == 0){
+                $this->id = 0;    
+            }
+            else{
+                $element = array_pop($array);
+                $this->id = strval($element->id + 1);
+            }
         }        
     }  
 
     public function ValidarUser(){
         if(Usuario::$PrimerHilo){
-            $array = LeerArchivoTxt("Usuarios.csv");
+            $array = LeerArchivoTxt("Usuarios/Usuarios.csv");
             foreach ($array as $value) {
                 $obj = explode(",", $value);                
                 $usuario = new Usuario($obj[0], $obj[1], null);
@@ -50,11 +55,11 @@ class Usuario{
             $msg = "Faltan Datos, ".date("d/m/Y H:i:s");
         }        
         echo $msg;
-        EscribirArchivoTxt("log.csv", $msg);
+        EscribirArchivoTxt("Usuarios/log.csv", $msg);
     }
 
     public static function Listar(){
-        $array = LeerArchivoTxt("Usuarios.csv");
+        $array = LeerArchivoTxt("Usuarios/Usuarios.csv");
         $mostrar = "<ul>";
         foreach ($array as $value) {        
             $obj = explode(",", $value);
@@ -69,11 +74,11 @@ class Usuario{
     }
 
     public static function ListarJSON(){
-        $array = LeerArchivoJSON("Usuarios.json");
+        $array = LeerArchivoJSON("Usuarios/Usuarios.json");
         $mostrar = "<ul>";
         foreach ($array as $value) {
             $usuario = new Usuario($value->_user, $value->_pass, $value->_mail, $value->_id);
-            $path = "Fotos/".$usuario->_user.".png";
+            $path = "Usuarios/Fotos/".$usuario->_user.".png";
             $foto = base64_encode(file_get_contents($path));
             $src = 'data:'.mime_content_type($path).';base64,'.$foto; 
 
@@ -84,11 +89,11 @@ class Usuario{
     }
 
     public function Alta(){
-        echo (EscribirArchivoTxt("Usuarios.csv", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
+        echo (EscribirArchivoTxt("Usuarios/Usuarios.csv", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
     }
 
     public function AltaJSON(){
-        echo (EscribirArchivoJSON("Usuarios.json", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
+        echo (EscribirArchivoJSON("Usuarios/Usuarios.json", $this) > 0) ? "Se agrego el usuario correctamente al archivo" : "Error al guardar";
     }
 
     function __toString(){

@@ -20,8 +20,8 @@ if (isset($_POST["usuario"]) && isset($_POST["pass"]) && isset($_POST["mail"])) 
     $u = new Usuario($_POST["usuario"], $_POST["pass"], $_POST["mail"]);
     $u->AltaJSON();
 
-    $destino = "Fotos/".$_POST["usuario"];
-    $backup = "Fotos/VA/".$_POST["usuario"];
+    $destino = "Usuarios/Fotos/".$_POST["usuario"];
+    $backup = "Usuarios/Fotos/VA/".$_POST["usuario"];
     echo MoveFile($_FILES["fotoUsuario"], $destino, $backup);
 }
 else{

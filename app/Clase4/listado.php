@@ -21,8 +21,7 @@ if (isset($_GET["listado"])) {
 
     if($_GET["listado"] == "usuarios"){
         echo Usuario::ListarJSON();
-    }
-    
+    }    
 }
 else{
     http_response_code(404);

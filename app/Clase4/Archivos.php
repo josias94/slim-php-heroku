@@ -1,7 +1,7 @@
 <?php  
 
 function EscribirArchivoJSON($file_name, $Obj){
-    $pudo = 0;    
+    $pudo = 0;
     if (!file_exists($file_name) || filesize($file_name) == 0){
         $file = fopen($file_name, "w");
         $array[0] = $Obj;
@@ -10,10 +10,18 @@ function EscribirArchivoJSON($file_name, $Obj){
     }
     else{
         $file = fopen($file_name, "c");
-        fseek($file, filesize($file_name)-1);        
-        $pudo = fwrite($file, ",".json_encode($Obj)."]");        
+        fseek($file, filesize($file_name)-1);
+        $pudo = fwrite($file, ",".json_encode($Obj)."]");
         fclose($file);
     }
+    return $pudo;
+}
+
+function EscribirArrayJSON($file_name, $array){
+    $pudo = 0;    
+    $file = fopen($file_name, "w");
+    $pudo = fwrite($file, json_encode($array));
+    fclose($file);    
     return $pudo;
 }
 
@@ -61,7 +69,7 @@ function MoveFile($file, $destino, $backup){
     $destino .= ".png";//Se cambia la imagen a png porque sino en la lectura no la encuentro xd
     $backup .= date("d-m-Y-H-i-s").".".$tipo[1];
 
-    if(file_exists($destino)){        
+    if(file_exists($destino)){
         rename($destino, $backup);
     }    
     return move_uploaded_file($file["tmp_name"], $destino);
