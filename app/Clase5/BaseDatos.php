@@ -32,7 +32,7 @@ class BaseDatos{
         return $this->objetoPDO->lastInsertId();
     }
 
-    public function Execute($sql){
+    public function Prepare($sql){        
         return $this->_PDO->prepare($sql);
     }
 

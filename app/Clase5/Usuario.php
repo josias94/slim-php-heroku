@@ -73,10 +73,7 @@ class Usuario implements JsonSerializable{
         foreach ($array as $value) {        
             $obj = explode(",", $value);
             $usuario = new Usuario($obj[0], $obj[1], $obj[2]);
-            $mostrar .= "<li>".$usuario."</li><br>"; 
-            // foreach ($obj as $atributo) {
-            //     $mostrar .= "<li>".$atributo."</li><br>";
-            // }        
+            $mostrar .= "<li>".$usuario."</li><br>";      
         }
         $mostrar .= "</ul>";
         return $mostrar;
@@ -125,7 +122,7 @@ class Usuario implements JsonSerializable{
     #region DB
     public static function SelectAll($id = "null"){
         $db = BaseDatos::GetSingleton("localhost","comercio");
-        $response = $db->Execute("SELECT nombre as _user,
+        $response = $db->Prepare("SELECT nombre as _user,
                                          clave as _pass,
                                          email as _mail
                                          FROM Usuario
@@ -134,6 +131,19 @@ class Usuario implements JsonSerializable{
         $response->execute();
         $respuesta = $response->fetchAll(PDO::FETCH_CLASS, "usuario");
         echo Usuario::ListarArray($respuesta);
+    }
+
+    public static function Insert($nombre, $apellido, $clave, $email, $localidad, $fechaDeRegistro){
+        $db = BaseDatos::GetSingleton("localhost","comercio");
+        $response = $db->Prepare("INSERT INTO usuario (nombre, apellido, clave, email, localidad, fechaDeRegistro)
+                                        VALUES (:nombre,:apellido,:clave,:email,:localidad,:fechaDeRegistro)");
+        $response->bindValue(':nombre', $nombre, PDO::PARAM_STR);
+        $response->bindValue(':apellido', $apellido, PDO::PARAM_STR);
+        $response->bindValue(':clave', $clave, PDO::PARAM_STR);
+        $response->bindValue(':email', $email, PDO::PARAM_STR);
+        $response->bindValue(':localidad', $localidad, PDO::PARAM_STR);
+        $response->bindValue(':fechaDeRegistro', $fechaDeRegistro, PDO::PARAM_STR);
+        $response->execute();        
     }
 
     public static function ListarArray($array){
