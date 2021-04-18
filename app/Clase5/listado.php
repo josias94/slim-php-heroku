@@ -21,7 +21,13 @@ include("Producto.php");
 if (isset($_GET["listado"])) {
 
     if($_GET["listado"] == "usuarios"){
-        echo Usuario::SelectAll();
+        if(isset($_GET["id"])){
+            Usuario::SelectAll($_GET["id"]);
+        }
+        else{
+            Usuario::SelectAll();
+        }
+        
         // echo Usuario::ListarJSON();
     }
     elseif($_GET["listado"] == "productos"){

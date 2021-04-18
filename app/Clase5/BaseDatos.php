@@ -12,7 +12,7 @@ class BaseDatos{
         if($codif == null) $codif = "utf8";
 
         try{
-            $this->_PDO = new PDO('mysql:host='.$host.';dbname='.$dbName.'.;charset='.$codif, $user, $pass, array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $this->_PDO = new PDO('mysql:host='.$host.';dbname='.$dbName.';charset='.$codif, $user, $pass, array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }
         catch(PDOException $e){
             echo $e->getMessage();

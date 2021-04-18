@@ -1,7 +1,7 @@
 <?php  
 
 function EscribirArchivoJSON($file_name, $Obj){
-    $pudo = 0;
+    $pudo = 0;    
     if (!file_exists($file_name) || filesize($file_name) == 0){
         $file = fopen($file_name, "w");
         $array[0] = $Obj;
