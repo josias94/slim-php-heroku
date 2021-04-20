@@ -11,7 +11,7 @@ class Usuario implements JsonSerializable{
     private static $PrimerHilo = 1;
 
 
-    public function __construct($user = null , $pass = null , $mail = null, $id = null){
+    public function __construct($user = null, $pass = null, $mail = null, $id = null){
         if($user != null)
         $this->_user = $user;
         if($pass != null)
@@ -129,9 +129,8 @@ class Usuario implements JsonSerializable{
                                          WHERE ($id is null or id = $id)
                                          ");
         $response->execute();
-        $respuesta = $response->fetchAll(PDO::FETCH_CLASS, "usuario");        
-        var_dump($respuesta);
-        //echo Usuario::ListarArray($respuesta);
+        $respuesta = $response->fetchAll(PDO::FETCH_CLASS, "usuario");
+        echo Usuario::ListarArray($respuesta);
     }
 
     public static function Insert($nombre, $apellido, $clave, $email, $localidad, $fechaDeRegistro){
@@ -144,7 +143,7 @@ class Usuario implements JsonSerializable{
         $response->bindValue(':email', $email, PDO::PARAM_STR);
         $response->bindValue(':localidad', $localidad, PDO::PARAM_STR);
         $response->bindValue(':fechaDeRegistro', $fechaDeRegistro, PDO::PARAM_STR);
-        $response->execute();        
+        echo ($response->execute()) ? "Se inserto el usuario ". $db->ReturnLastInsertId()." correctamente": "Fallo al insertar";
     }
 
     public static function ListarArray($array){
