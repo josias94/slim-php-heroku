@@ -30,7 +30,7 @@ class BaseDatos{
 
     //TODO: Revisar... 
     public function ReturnLastInsertId(){
-        return $this->objetoPDO->lastInsertId();
+        return $this->_PDO->lastInsertId();
     }
 
     public function Prepare($sql){        

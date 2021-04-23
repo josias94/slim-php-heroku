@@ -27,7 +27,7 @@ if (isset($_GET["listado"])) {
         else{
             Usuario::SelectAll();
         }        
-        // echo Usuario::ListarJSON();
+        
     }
     elseif($_GET["listado"] == "productos"){
         echo Producto::ListarJSON();

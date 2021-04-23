@@ -3,40 +3,67 @@ include_once("Archivos.php");
 include_once("BaseDatos.php");
 
 class Usuario implements JsonSerializable{
-    private $_id;
-    private $_user;
-    private $_pass;
-    private $_mail;
+    public $_id;
+    public $_nombre;
+    public $_apellido;
+    public $_clave;
+    public $_email;
+    public $_localidad;
+    public $_fechaDeRegistro;
     private static $_ListaUsuarios = [];
     private static $PrimerHilo = 1;
 
-
-    public function __construct($user = null , $pass = null , $mail = null, $id = null){
-        if($user != null)
-        $this->_user = $user;
-        if($pass != null)
-        $this->_pass = $pass;
-        if($mail != null)
-        $this->_mail = $mail;
-        if($id != null){
-            $this->_id = $id;
-        }
-        else{            
-            $array = LeerArchivoJSON("Usuarios/Usuarios.json");
-            if(count($array) == 0){                
-                $this->_id = "0";    
-            }
-            else{                
-                $element = array_pop($array);
-                $this->_id = strval($element->_id + 1);
-            }
-        }        
-    } 
+    public function __construct()
+    {
+        
+    }
     
     public function jsonSerialize()
     {
         return get_object_vars($this);
     }
+
+
+    #region DB
+    public static function SelectAll($id = "null"){
+        $db = BaseDatos::GetSingleton("localhost","comercio");
+        $response = $db->Prepare("SELECT nombre as _user,
+                                        clave as _pass,
+                                        email as _mail
+                                        FROM Usuario
+                                        WHERE ($id is null or id = $id)
+                                        ");
+        $response->execute();
+        $respuesta = $response->fetchAll(PDO::FETCH_CLASS, "usuario");        
+        
+        echo Usuario::ListarArray($respuesta);
+    }
+
+    public function Insert(){
+        $db = BaseDatos::GetSingleton("localhost","comercio");
+        $response = $db->Prepare("INSERT INTO usuario (nombre, apellido, clave, email, localidad, fechaDeRegistro)
+                                        VALUES (:nombre,:apellido,:clave,:email,:localidad,:fechaDeRegistro)");
+
+        $response->bindValue(':nombre', $this->_nombre, PDO::PARAM_STR);
+        $response->bindValue(':apellido', $this->_apellido, PDO::PARAM_STR);
+        $response->bindValue(':clave', $this->_clave, PDO::PARAM_STR);
+        $response->bindValue(':email', $this->_email, PDO::PARAM_STR);
+        $response->bindValue(':localidad', $this->_localidad, PDO::PARAM_STR);
+        $response->bindValue(':fechaDeRegistro', $this->_fechaDeRegistro, PDO::PARAM_STR);
+        echo ($response->execute()) ? "Se inserto el usuario ". $db->ReturnLastInsertId()." correctamente": "Fallo al insertar";     
+    }
+
+    public static function ListarArray($array){
+        $mostrar = "<ul>";
+        foreach ($array as $value) {
+            $mostrar .= "<li>".$value."</li><br>";       
+        }
+        $mostrar .= "</ul>";
+        return $mostrar;
+    }
+    #endregion
+
+
 
     public function ValidarUser(){
         if(Usuario::$PrimerHilo){
@@ -119,43 +146,7 @@ class Usuario implements JsonSerializable{
         return null;
     }
 
-    #region DB
-    public static function SelectAll($id = "null"){
-        $db = BaseDatos::GetSingleton("localhost","comercio");
-        $response = $db->Prepare("SELECT nombre as _user,
-                                         clave as _pass,
-                                         email as _mail
-                                         FROM Usuario
-                                         WHERE ($id is null or id = $id)
-                                         ");
-        $response->execute();
-        $respuesta = $response->fetchAll(PDO::FETCH_CLASS, "usuario");        
-        var_dump($respuesta);
-        //echo Usuario::ListarArray($respuesta);
-    }
-
-    public static function Insert($nombre, $apellido, $clave, $email, $localidad, $fechaDeRegistro){
-        $db = BaseDatos::GetSingleton("localhost","comercio");
-        $response = $db->Prepare("INSERT INTO usuario (nombre, apellido, clave, email, localidad, fechaDeRegistro)
-                                        VALUES (:nombre,:apellido,:clave,:email,:localidad,:fechaDeRegistro)");
-        $response->bindValue(':nombre', $nombre, PDO::PARAM_STR);
-        $response->bindValue(':apellido', $apellido, PDO::PARAM_STR);
-        $response->bindValue(':clave', $clave, PDO::PARAM_STR);
-        $response->bindValue(':email', $email, PDO::PARAM_STR);
-        $response->bindValue(':localidad', $localidad, PDO::PARAM_STR);
-        $response->bindValue(':fechaDeRegistro', $fechaDeRegistro, PDO::PARAM_STR);
-        $response->execute();        
-    }
-
-    public static function ListarArray($array){
-        $mostrar = "<ul>";
-        foreach ($array as $value) {
-            $mostrar .= "<li>".$value."</li><br>";       
-        }
-        $mostrar .= "</ul>";
-        return $mostrar;
-    }
-	#endregion
+    
     
 }
 

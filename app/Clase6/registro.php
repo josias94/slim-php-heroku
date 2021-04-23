@@ -12,13 +12,17 @@ retorna si se pudo agregar o no.
 include("Usuario.php");
 
 if (isset($_POST["nombre"]) && isset($_POST["pass"]) && isset($_POST["mail"])) {        
-    $nombre = $_POST["nombre"];
-    $apellido = $_POST["apellido"];
-    $clave = $_POST["pass"];
-    $email = $_POST["mail"];
-    $localidad = $_POST["localidad"];
-    $fecha = date("Y-m-d");
-    Usuario::Insert($nombre, $apellido, $clave, $email, $localidad, $fecha);
+
+    $u = new Usuario();
+    $u->_nombre = $_POST["nombre"];
+    $u->_apellido = $_POST["apellido"];
+    $u->_clave = $_POST["pass"];
+    $u->_email = $_POST["mail"];
+    $u->_localidad = $_POST["localidad"];
+    $u->_fechaDeRegistro = date("Y-m-d");
+
+    echo $u->Insert();
+    
     // $destino = "Usuarios/Fotos/".$_POST["nombre"];
     // $backup = "Usuarios/Fotos/VA/".$_POST["nombre"];
     // MoveFile($_FILES["fotoUsuario"], $destino, $backup);
