@@ -9,11 +9,11 @@ crear un objeto con la fecha de registro y utilizar sus métodos para poder hace
 guardando los datos la base de datos
 retorna si se pudo agregar o no.
 */
-include("Usuario.php");
+include("Empleado.php");
 
 if (isset($_POST["nombre"]) && isset($_POST["pass"]) && isset($_POST["mail"])) {        
 
-    $u = new Usuario();
+    $u = new Empleado();
     $u->_nombre = $_POST["nombre"];
     $u->_apellido = $_POST["apellido"];
     $u->_clave = $_POST["pass"];
@@ -22,10 +22,6 @@ if (isset($_POST["nombre"]) && isset($_POST["pass"]) && isset($_POST["mail"])) {
     $u->_fechaDeRegistro = date("Y-m-d");
 
     echo $u->Insert();
-    
-    // $destino = "Usuarios/Fotos/".$_POST["nombre"];
-    // $backup = "Usuarios/Fotos/VA/".$_POST["nombre"];
-    // MoveFile($_FILES["fotoUsuario"], $destino, $backup);
 }
 else{
     http_response_code(404);
